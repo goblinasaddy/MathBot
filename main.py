@@ -5,7 +5,7 @@ import numpy as np
 import google.generativeai as genai
 from PIL import Image
 import streamlit as st
-import speech_recognition as sr
+
 
 
 # Setup AI
@@ -39,21 +39,21 @@ with col2:
             except:
                 output_text_area.subheader("Error with chatbot.")
 
-    # Voice input
-    if st.button("🎙️ Speak Instead"):
-        recognizer = sr.Recognizer()
-        with sr.Microphone() as source:
-            st.info("Listening...")
-            audio = recognizer.listen(source)
-        try:
-            text = recognizer.recognize_google(audio)
-            st.success(f"You said: {text}")
-            reply = model.generate_content(text).text
-            output_text_area.subheader(reply)
-        except sr.UnknownValueError:
-            st.error("Sorry, I couldn't understand your voice.")
-        except sr.RequestError:
-            st.error("Speech service error.")
+    # # Voice input
+    # if st.button("🎙️ Speak Instead"):
+    #     recognizer = sr.Recognizer()
+    #     with sr.Microphone() as source:
+    #         st.info("Listening...")
+    #         audio = recognizer.listen(source)
+    #     try:
+    #         text = recognizer.recognize_google(audio)
+    #         st.success(f"You said: {text}")
+    #         reply = model.generate_content(text).text
+    #         output_text_area.subheader(reply)
+    #     except sr.UnknownValueError:
+    #         st.error("Sorry, I couldn't understand your voice.")
+    #     except sr.RequestError:
+    #         st.error("Speech service error.")
 
 # Setup AI
 #genai.configure(api_key="AIzaSyBk6tYLtW6U9LXN67EgA8gA7a2YlYqLC7Y")
